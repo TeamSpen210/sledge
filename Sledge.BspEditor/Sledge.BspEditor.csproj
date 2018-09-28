@@ -153,6 +153,14 @@
     <Compile Include="Environment\IEnvironmentEditor.cs" />
     <Compile Include="Environment\IEnvironmentFactory.cs" />
     <Compile Include="Environment\SerialisedEnvironment.cs" />
+    <Compile Include="Environment\Source\SourceEnvironment.cs" />
+    <Compile Include="Environment\Source\SourceEnvironmentEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Environment\Source\SourceEnvironmentEditor.Designer.cs">
+      <DependentUpon>SourceEnvironmentEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Environment\Source\SourceEnvironmentFactory.cs" />
     <Compile Include="Environment\TextureCollection.cs" />
     <Compile Include="Grid\GridLine.cs" />
     <Compile Include="Grid\GridLineType.cs" />
@@ -304,6 +312,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Environment\Goldsource\GoldsourceEnvironmentEditor.resx">
       <DependentUpon>GoldsourceEnvironmentEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Environment\Source\SourceEnvironmentEditor.resx">
+      <DependentUpon>SourceEnvironmentEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
