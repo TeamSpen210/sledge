@@ -98,74 +98,80 @@
             "UntitledDocumentName": "Untitled {0}" 
         }
     },
-    "Environment": {
-        "Controls": {
-            "EnvironmentCollectionEditor": {
-                "Add": "Add",
-                "Remove": "Remove",
-                "Name": "Name" 
-            }
-        },
-        "Goldsource": {
-            "AutomaticVisgroups": {
-                "Entities": "Entities",
-                "ToolBrushes": "Tool brushes",
-                "WorldGeometry": "World geometry",
-
-                "BrushEntities": "Brush entities",
-                "PointEntities": "Point entities",
-                "Lights": "Lights",
-                "Triggers": "Triggers",
-                "Nodes": "Nodes",
-
-                "Bevel": "Bevel",
-                "Hint": "Hint",
-                "Origin": "Origin",
-                "Skip": "Skip",
-                "Trigger": "Trigger",
-
-                "Brushes": "Brushes",
-                "Null": "Null",
-                "Sky": "Sky",
-                "Water": "Water"
-            },
-            "GoldsourceEnvironmentFactory": {
-                "Description": "Goldsource (HL1)"
-            },
-            "GoldsourceEnvironmentEditor": {
-                "Directories": "Directories",
-                "GameDataFiles": "Game Data Files",
-                "BuildTools": "Build Tools",
-                "Textures": "Textures",
-                "Browse": "Browse...",
+	"Environment": {
+		"Controls": {
+			"EnvironmentCollectionEditor": {
+				"Add": "Add",
+				"Remove": "Remove",
+				"Name": "Name"
+			},
+            "FGDSelector": {
                 "Add": "Add...",
                 "Remove": "Remove",
                 "Name": "Name",
                 "Path": "Path",
-                "GameDirectory": "Game directory",
-                "BaseDirectory": "Base game directory (e.g. 'valve')",
-                "ModDirectory": "Mod directory (e.g. 'cstrike')",
-                "GameExecutable": "Game executable (e.g. 'hl.exe')",
-                "LoadHDModels": "Load HD models (if available)",
                 "DefaultPointEntity": "Default point entity",
                 "DefaultBrushEntity": "Default brush entity",
                 "Low": "Low",
                 "High": "High",
-                "OverrideMapSize": "Override map size",
-                "IncludeFgdDirectories": "Load sprites and models from FGD directories",
-                "BuildDirectory": "Folder containing build tools:",
-                "IncludeToolsDirectory": "Automatically include textures found in this directory",
-                "CopyBspToGameFolder": "Copy BSP/RES to game folder",
-                "RunGame": "Run the game after successful compile",
-                "AskToRunGame": "Ask before running the game",
-                "CopyToMapFolder": "Copy to map folder:",
-                "DefaultTextureScale": "Default texture scale",
-                "TexturePackagesToInclude": "Texture packages to include:",
-                "ToggleAll": "Toggle all",
-                "AdditionalTexturePackages": "Additional texture packages:"
+                "OverrideMapSize": "Override map size"
             }
-        }
-    },
+		},
+		"Goldsource": {
+			"AutomaticVisgroups": {
+				"Entities": "Entities",
+				"ToolBrushes": "Tool brushes",
+				"WorldGeometry": "World geometry",
+
+				"BrushEntities": "Brush entities",
+				"PointEntities": "Point entities",
+				"Lights": "Lights",
+				"Triggers": "Triggers",
+				"Nodes": "Nodes",
+
+				"Bevel": "Bevel",
+				"Hint": "Hint",
+				"Origin": "Origin",
+				"Skip": "Skip",
+				"Trigger": "Trigger",
+
+				"Brushes": "Brushes",
+				"Null": "Null",
+				"Sky": "Sky",
+				"Water": "Water"
+			},
+			"GoldsourceEnvironmentFactory": {
+				"Description": "Goldsource (HL1)"
+			},
+			"GoldsourceEnvironmentEditor": {
+				"Directories": "Directories",
+				"GameDataFiles": "Game Data Files",
+				"BuildTools": "Build Tools",
+				"Textures": "Textures",
+				"Browse": "Browse...",
+				"Add": "Add...",
+				"Remove": "Remove",
+				"Name": "Name",
+				"Path": "Path",
+				"GameDirectory": "Game directory",
+				"BaseDirectory": "Base game directory (e.g. 'valve')",
+				"ModDirectory": "Mod directory (e.g. 'cstrike')",
+				"GameExecutable": "Game executable (e.g. 'hl.exe')",
+				"LoadHDModels": "Load HD models (if available)",
+				"IncludeFgdDirectories": "Load sprites and models from FGD directories",
+				"BuildDirectory": "Folder containing build tools:",
+				"IncludeToolsDirectory": "Automatically include textures found in this directory",
+				"CopyBspToGameFolder": "Copy BSP/RES to game folder",
+				"RunGame": "Run the game after successful compile",
+				"AskToRunGame": "Ask before running the game",
+				"CopyToMapFolder": "Copy to map folder:",
+				"DefaultTextureScale": "Default texture scale",
+				"TexturePackagesToInclude": "Texture packages to include:",
+				"ToggleAll": "Toggle all",
+				"AdditionalTexturePackages": "Additional texture packages:"
+			}
+		}
+	},
     "Grid": {
         "NoGridFactory": {
             "Name": "No grid",

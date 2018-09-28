@@ -135,6 +135,12 @@
     <Compile Include="Environment\Controls\EnvironmentSelectionForm.Designer.cs">
       <DependentUpon>EnvironmentSelectionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Environment\Controls\FGDSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Environment\Controls\FGDSelector.Designer.cs">
+      <DependentUpon>FGDSelector.cs</DependentUpon>
+    </Compile>
     <Compile Include="Environment\Empty\EmptyEnvironment.cs" />
     <Compile Include="Environment\Empty\EmptyTextureCollection.cs" />
     <Compile Include="Environment\Goldsource\GoldsourceEnvironmentEditor.cs">
@@ -309,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Environment\Controls\EnvironmentSelectionForm.resx">
       <DependentUpon>EnvironmentSelectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Environment\Controls\FGDSelector.resx">
+      <DependentUpon>FGDSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Environment\Goldsource\GoldsourceEnvironmentEditor.resx">
       <DependentUpon>GoldsourceEnvironmentEditor.cs</DependentUpon>

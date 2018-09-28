@@ -10,7 +10,7 @@ namespace Sledge.BspEditor.Environment.Source
 	{
 		public Control Control => this;
 		public event EventHandler EnvironmentChanged;
-		private readonly IGameDataProvider _fgdProvider = Common.Container.Get<IGameDataProvider>("Fgd");
+
 
 		public IEnvironment Environment
 		{

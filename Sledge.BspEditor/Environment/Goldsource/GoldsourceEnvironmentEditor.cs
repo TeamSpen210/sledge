@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Sledge.Common.Translations;
-using Sledge.DataStructures.GameData;
 using Sledge.FileSystem;
 using Sledge.Providers.GameData;
 using Sledge.Providers.Texture;
@@ -31,17 +30,15 @@ namespace Sledge.BspEditor.Environment.Goldsource
         {
             InitializeComponent();
 
+			fgdSelector.SetProvider(_fgdProvider);
+
             txtGameDir.TextChanged += OnEnvironmentChanged;
             cmbBaseGame.SelectedIndexChanged += OnEnvironmentChanged;
             cmbGameMod.SelectedIndexChanged += OnEnvironmentChanged;
             cmbGameExe.SelectedIndexChanged += OnEnvironmentChanged;
             chkLoadHdModels.CheckedChanged += OnEnvironmentChanged;
 
-            cmbDefaultPointEntity.SelectedIndexChanged += OnEnvironmentChanged;
-            cmbDefaultBrushEntity.SelectedIndexChanged += OnEnvironmentChanged;
-            chkOverrideMapSize.CheckedChanged += OnEnvironmentChanged;
-            cmbMapSizeOverrideLow.SelectedIndexChanged += OnEnvironmentChanged;
-            cmbMapSizeOverrideHigh.SelectedIndexChanged += OnEnvironmentChanged;
+			fgdSelector.OnChanged += OnEnvironmentChanged;
             chkIncludeFgdDirectories.CheckedChanged += OnEnvironmentChanged;
 
             txtBuildToolsDirectory.TextChanged += OnEnvironmentChanged;
@@ -71,29 +68,25 @@ namespace Sledge.BspEditor.Environment.Goldsource
             CreateHandle();
             var prefix = GetType().FullName;
 
+			fgdSelector.Translate(strings);
+
             grpDirectories.Text = strings.GetString(prefix, "Directories");
-            grpFgds.Text = strings.GetString(prefix, "GameDataFiles");
             grpBuildTools.Text = strings.GetString(prefix, "BuildTools");
             grpTextures.Text = strings.GetString(prefix, "Textures");
 
             btnBuildToolsBrowse.Text = btnGameDirBrowse.Text = strings.GetString(prefix, "Browse");
-            btnAddFgd.Text = btnAddTextures.Text = strings.GetString(prefix, "Add");
-            btnRemoveFgd.Text = btnRemoveTextures.Text = strings.GetString(prefix, "Remove");
+	        btnAddTextures.Text = strings.GetString(prefix, "Add");
+	        btnRemoveTextures.Text = strings.GetString(prefix, "Remove");
 
-            colFgdName.Text = colWadName.Text = strings.GetString(prefix, "Name");
-            colFgdPath.Text = colWadPath.Text = strings.GetString(prefix, "Path");
+	        colWadName.Text = strings.GetString(prefix, "Name");
+	        colWadPath.Text = strings.GetString(prefix, "Path");
 
-            lblGameDir.Text = strings.GetString(prefix, "GameDirectory");
+			lblGameDir.Text = strings.GetString(prefix, "GameDirectory");
             lblBaseGame.Text = strings.GetString(prefix, "BaseDirectory");
             lblGameMod.Text = strings.GetString(prefix, "ModDirectory");
             lblGameExe.Text = strings.GetString(prefix, "GameExecutable");
             chkLoadHdModels.Text = strings.GetString(prefix, "LoadHDModels");
             
-            lblDefaultPointEntity.Text = strings.GetString(prefix, "DefaultPointEntity");
-            lblDefaultBrushEntity.Text = strings.GetString(prefix, "DefaultBrushEntity");
-            lblMapSizeOverrideLow.Text = strings.GetString(prefix, "Low");
-            lblMapSizeOverrideHigh.Text = strings.GetString(prefix, "High");
-            chkOverrideMapSize.Text = strings.GetString(prefix, "OverrideMapSize");
             chkIncludeFgdDirectories.Text = strings.GetString(prefix, "IncludeFgdDirectories");
 
             lblBuildExeFolder.Text = strings.GetString(prefix, "BuildDirectory");
@@ -124,19 +117,14 @@ namespace Sledge.BspEditor.Environment.Goldsource
             cmbGameExe.SelectedItem = env.GameExe;
             chkLoadHdModels.Checked = env.LoadHdModels;
 
-            lstFgds.Items.Clear();
-            foreach (var fileName in env.FgdFiles)
-            {
-                lstFgds.Items.Add(new ListViewItem(new[] { Path.GetFileName(fileName), fileName }) {ToolTipText = fileName});
-            }
-            UpdateFgdList();
+	        fgdSelector.fileList = env.FgdFiles;
+			fgdSelector.defaultPointEntity = env.DefaultPointEntity;
+	        fgdSelector.defaultBrushEntity = env.DefaultBrushEntity;
+	        fgdSelector.overrideMapSize = env.OverrideMapSize;
+	        fgdSelector.mapSizeOverrideLow = env.MapSizeLow;
+	        fgdSelector.mapSizeOverrideHigh = env.MapSizeHigh;
 
-            cmbDefaultPointEntity.SelectedItem = env.DefaultPointEntity;
-            cmbDefaultBrushEntity.SelectedItem = env.DefaultBrushEntity;
-            chkOverrideMapSize.Checked = env.OverrideMapSize;
-            cmbMapSizeOverrideLow.SelectedItem = Convert.ToString(env.MapSizeLow, CultureInfo.InvariantCulture);
-            cmbMapSizeOverrideHigh.SelectedItem = Convert.ToString(env.MapSizeHigh, CultureInfo.InvariantCulture);
-            chkIncludeFgdDirectories.Checked = env.IncludeFgdDirectoriesInEnvironment;
+			chkIncludeFgdDirectories.Checked = env.IncludeFgdDirectoriesInEnvironment;
 
             txtBuildToolsDirectory.Text = env.ToolsDirectory;
             chkIncludeToolsDirectory.Checked = env.IncludeToolsDirectoryInEnvironment;
@@ -182,12 +170,13 @@ namespace Sledge.BspEditor.Environment.Goldsource
                 GameExe = Convert.ToString(cmbGameExe.SelectedItem, CultureInfo.InvariantCulture),
                 LoadHdModels = chkLoadHdModels.Checked,
 
-                FgdFiles = lstFgds.Items.OfType<ListViewItem>().Select(x => x.SubItems[1].Text).Where(File.Exists).ToList(),
-                DefaultPointEntity = Convert.ToString(cmbDefaultPointEntity.SelectedItem, CultureInfo.InvariantCulture),
-                DefaultBrushEntity = Convert.ToString(cmbDefaultBrushEntity.SelectedItem, CultureInfo.InvariantCulture),
-                OverrideMapSize = chkOverrideMapSize.Checked,
-                MapSizeLow = decimal.TryParse(Convert.ToString(cmbMapSizeOverrideLow.SelectedItem, CultureInfo.InvariantCulture), out decimal l) ? l : 0,
-                MapSizeHigh = decimal.TryParse(Convert.ToString(cmbMapSizeOverrideHigh.SelectedItem, CultureInfo.InvariantCulture), out decimal h) ? h : 0,
+                FgdFiles = fgdSelector.fileList,
+                DefaultPointEntity = fgdSelector.defaultPointEntity,
+                DefaultBrushEntity = fgdSelector.defaultBrushEntity,
+                OverrideMapSize = fgdSelector.overrideMapSize,
+                MapSizeLow = fgdSelector.mapSizeOverrideLow,
+                MapSizeHigh = fgdSelector.mapSizeOverrideHigh,
+
                 IncludeFgdDirectoriesInEnvironment = chkIncludeFgdDirectories.Checked,
 
                 ToolsDirectory = txtBuildToolsDirectory.Text,
@@ -273,90 +262,7 @@ namespace Sledge.BspEditor.Environment.Goldsource
             if (cmbGameExe.Items.Contains(exe)) cmbGameExe.SelectedItem = exe;
             else if (cmbGameExe.Items.Count > 0) cmbGameExe.SelectedIndex = 0;
         }
-
-        // Game data files
-
-        public string FgdFilesLabel { get; set; } = "Forge Game Data files";
-
-        private void BrowseFgd(object sender, EventArgs e)
-        {
-            using (var ofd = new OpenFileDialog { Filter = FgdFilesLabel + @" (*.fgd)|*.fgd", Multiselect = true })
-            {
-                if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    foreach (var fileName in ofd.FileNames)
-                    {
-                        lstFgds.Items.Add(new ListViewItem(new[]
-                        {
-                            Path.GetFileName(fileName),
-                            fileName
-                        }) {ToolTipText = fileName});
-                    }
-                    UpdateFgdList();
-                    OnEnvironmentChanged(this, EventArgs.Empty);
-                }
-            }
-        }
-        
-        private void RemoveFgd(object sender, EventArgs e)
-        {
-            if (lstFgds.SelectedItems.Count > 0)
-            {
-                foreach (var i in lstFgds.SelectedItems.OfType<ListViewItem>().ToList())
-                {
-                    lstFgds.Items.Remove(i);
-                }
-                UpdateFgdList();
-                OnEnvironmentChanged(this, EventArgs.Empty);
-            }
-        }
-
-        private void UpdateFgdList()
-        {
-            lstFgds.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-
-            var entities = new List<GameDataObject>();
-            if (_fgdProvider != null)
-            {
-                var files = lstFgds.Items.OfType<ListViewItem>().Select(x => x.SubItems[1].Text).Where(File.Exists).Where(_fgdProvider.IsValidForFile);
-                try
-                {
-                    var gd = _fgdProvider.GetGameDataFromFiles(files);
-                    entities.AddRange(gd.Classes);
-                }
-                catch
-                {
-                    //
-                }
-            }
-
-            var selPoint = cmbDefaultPointEntity.SelectedItem as string;
-            var selBrush = cmbDefaultBrushEntity.SelectedItem as string;
-
-            cmbDefaultPointEntity.BeginUpdate();
-            cmbDefaultBrushEntity.BeginUpdate();
-
-            cmbDefaultPointEntity.Items.Clear();
-            cmbDefaultBrushEntity.Items.Clear();
-
-            cmbDefaultPointEntity.Items.Add("");
-            cmbDefaultBrushEntity.Items.Add("");
-
-            foreach (var gdo in entities.OrderBy(x => x.Name, StringComparer.InvariantCultureIgnoreCase))
-            {
-                if (gdo.ClassType == ClassType.Solid) cmbDefaultBrushEntity.Items.Add(gdo.Name);
-                else if (gdo.ClassType != ClassType.Base) cmbDefaultPointEntity.Items.Add(gdo.Name);
-            }
-
-            var idx = cmbDefaultBrushEntity.Items.IndexOf(selBrush ?? "");
-            if (idx >= 0) cmbDefaultBrushEntity.SelectedIndex = idx;
-            idx = cmbDefaultPointEntity.Items.IndexOf(selPoint ?? "");
-            if (idx >= 0) cmbDefaultPointEntity.SelectedIndex = idx;
-
-            cmbDefaultPointEntity.EndUpdate();
-            cmbDefaultBrushEntity.EndUpdate();
-        }
-
+		
         // Build tools
 
         private void BrowseBuildToolsDirectory(object sender, EventArgs e)
