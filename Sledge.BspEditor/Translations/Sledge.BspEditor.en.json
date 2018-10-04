@@ -170,6 +170,42 @@
 				"ToggleAll": "Toggle all",
 				"AdditionalTexturePackages": "Additional texture packages:"
 			}
+		},
+		"Source": {
+			"AutomaticVisgroups": {
+				"Entities": "Entities",
+				"ToolBrushes": "Tool brushes",
+				"WorldGeometry": "World geometry",
+
+				"BrushEntities": "Brush entities",
+				"PointEntities": "Point entities",
+				"Lights": "Lights",
+				"Triggers": "Triggers",
+				"Nodes": "Nodes",
+
+				"Hint": "Hint",
+				"Skip": "Skip",
+                "Areaportals": "Areaportals",
+				"Triggers": "Triggers",
+
+				"Brushes": "Brushes",
+				"Nodraw": "Nodraw",
+				"Sky": "Sky",
+				"Water": "Water"
+			},
+			"SourceEnvironmentFactory": {
+				"Description": "Source"
+			},
+			"SourceEnvironmentEditor": {
+				"Gameinfo": "Gameinfo.txt",
+				"BuildTools": "Build Tools",
+				"Browse": "Browse...",
+				"CopyBspToGameFolder": "Copy BSP to game folder",
+				"RunGame": "Run the game after successful compile",
+				"AskToRunGame": "Ask before running the game",
+				"CopyToMapFolder": "Copy to map folder:",
+				"DefaultTextureScale": "Default texture scale",
+			}
 		}
 	},
     "Grid": {

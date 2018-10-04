@@ -29,11 +29,13 @@
 		private void InitializeComponent()
 			{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SourceEnvironmentEditor));
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
 			this.grpDirectories = new System.Windows.Forms.GroupBox();
 			this.btnGameDirBrowse = new System.Windows.Forms.Button();
-			this.txtGameDir = new System.Windows.Forms.TextBox();
+			this.txtGameInfo = new System.Windows.Forms.TextBox();
 			this.lblGameinfo = new System.Windows.Forms.Label();
+			this.fgdSelector = new Sledge.BspEditor.Environment.Controls.FGDSelector();
 			this.grpDirectories.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -45,11 +47,11 @@
 			// grpDirectories
 			// 
 			this.grpDirectories.Controls.Add(this.btnGameDirBrowse);
-			this.grpDirectories.Controls.Add(this.txtGameDir);
+			this.grpDirectories.Controls.Add(this.txtGameInfo);
 			this.grpDirectories.Controls.Add(this.lblGameinfo);
 			this.grpDirectories.Location = new System.Drawing.Point(16, 18);
 			this.grpDirectories.Name = "grpDirectories";
-			this.grpDirectories.Size = new System.Drawing.Size(902, 418);
+			this.grpDirectories.Size = new System.Drawing.Size(902, 113);
 			this.grpDirectories.TabIndex = 0;
 			this.grpDirectories.TabStop = false;
 			this.grpDirectories.Text = "Directories";
@@ -63,16 +65,16 @@
 			this.btnGameDirBrowse.TabIndex = 16;
 			this.btnGameDirBrowse.Text = "Browse...";
 			this.btnGameDirBrowse.UseVisualStyleBackColor = true;
-			this.btnGameDirBrowse.Click += new System.EventHandler(this.BrowseGameDirectory);
+			this.btnGameDirBrowse.Click += new System.EventHandler(this.BrowseGameInfo);
 			// 
-			// txtGameDir
+			// txtGameInfo
 			// 
-			this.txtGameDir.Location = new System.Drawing.Point(170, 43);
-			this.txtGameDir.Name = "txtGameDir";
-			this.txtGameDir.Size = new System.Drawing.Size(566, 31);
-			this.txtGameDir.TabIndex = 1;
-			this.txtGameDir.Text = "example: SteamApps/common/Half Life 2/hl2/gameinfo.txt";
-			this.txtGameDir.DoubleClick += new System.EventHandler(this.BrowseGameDirectory);
+			this.txtGameInfo.Location = new System.Drawing.Point(170, 43);
+			this.txtGameInfo.Name = "txtGameInfo";
+			this.txtGameInfo.Size = new System.Drawing.Size(566, 31);
+			this.txtGameInfo.TabIndex = 1;
+			this.txtGameInfo.Text = "example: SteamApps/common/Half Life 2/hl2/gameinfo.txt";
+			this.txtGameInfo.DoubleClick += new System.EventHandler(this.BrowseGameInfo);
 			// 
 			// lblGameinfo
 			// 
@@ -83,14 +85,37 @@
 			this.lblGameinfo.TabIndex = 0;
 			this.lblGameinfo.Text = "Gameinfo.txt";
 			// 
+			// fgdSelector
+			// 
+			this.fgdSelector.defaultBrushEntity = "";
+			this.fgdSelector.defaultPointEntity = "";
+			this.fgdSelector.FgdFilesLabel = "Forge Game Data files";
+			this.fgdSelector.fileList = ((System.Collections.Generic.List<string>)(resources.GetObject("fgdSelector.fileList")));
+			this.fgdSelector.Location = new System.Drawing.Point(13, 137);
+			this.fgdSelector.mapSizeOverrideHigh = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.fgdSelector.mapSizeOverrideLow = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+			this.fgdSelector.Name = "fgdSelector";
+			this.fgdSelector.overrideMapSize = true;
+			this.fgdSelector.Size = new System.Drawing.Size(905, 596);
+			this.fgdSelector.TabIndex = 1;
+			// 
 			// SourceEnvironmentEditor
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.fgdSelector);
 			this.Controls.Add(this.grpDirectories);
 			this.Margin = new System.Windows.Forms.Padding(6);
 			this.Name = "SourceEnvironmentEditor";
-			this.Size = new System.Drawing.Size(944, 2312);
+			this.Size = new System.Drawing.Size(932, 2312);
 			this.grpDirectories.ResumeLayout(false);
 			this.grpDirectories.PerformLayout();
 			this.ResumeLayout(false);
@@ -102,7 +127,8 @@
 		private System.Windows.Forms.NotifyIcon notifyIcon1;
 		private System.Windows.Forms.GroupBox grpDirectories;
 		private System.Windows.Forms.Label lblGameinfo;
-		private System.Windows.Forms.TextBox txtGameDir;
+		private System.Windows.Forms.TextBox txtGameInfo;
 		private System.Windows.Forms.Button btnGameDirBrowse;
+		private Controls.FGDSelector fgdSelector;
 		}
 	}
