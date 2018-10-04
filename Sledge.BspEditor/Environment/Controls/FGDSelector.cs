@@ -110,10 +110,9 @@ namespace Sledge.BspEditor.Environment.Controls
 					{
 						lstFgds.Items.Add(new ListViewItem(new[]
 							{
-								Path.GetFileName(fileName),
-								fileName
-							})
-							{ToolTipText = fileName});
+							Path.GetFileName(fileName),
+							fileName
+							}) {ToolTipText = fileName});
 					}
 					UpdateFgdList();
 					OnChanged(this, EventArgs.Empty);

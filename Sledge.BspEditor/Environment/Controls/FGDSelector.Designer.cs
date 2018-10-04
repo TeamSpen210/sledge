@@ -88,7 +88,7 @@
 			this.grpFgds.Margin = new System.Windows.Forms.Padding(6);
 			this.grpFgds.Name = "grpFgds";
 			this.grpFgds.Padding = new System.Windows.Forms.Padding(6);
-			this.grpFgds.Size = new System.Drawing.Size(918, 585);
+			this.grpFgds.Size = new System.Drawing.Size(888, 585);
 			this.grpFgds.TabIndex = 48;
 			this.grpFgds.TabStop = false;
 			this.grpFgds.Text = "Game Data Files";
@@ -160,7 +160,7 @@
 			// 
 			// btnRemoveFgd
 			// 
-			this.btnRemoveFgd.Location = new System.Drawing.Point(738, 92);
+			this.btnRemoveFgd.Location = new System.Drawing.Point(734, 92);
 			this.btnRemoveFgd.Margin = new System.Windows.Forms.Padding(6);
 			this.btnRemoveFgd.Name = "btnRemoveFgd";
 			this.btnRemoveFgd.Size = new System.Drawing.Size(148, 44);
@@ -210,7 +210,7 @@
 			// 
 			// btnAddFgd
 			// 
-			this.btnAddFgd.Location = new System.Drawing.Point(738, 37);
+			this.btnAddFgd.Location = new System.Drawing.Point(734, 36);
 			this.btnAddFgd.Margin = new System.Windows.Forms.Padding(6);
 			this.btnAddFgd.Name = "btnAddFgd";
 			this.btnAddFgd.Size = new System.Drawing.Size(148, 44);
@@ -235,7 +235,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.grpFgds);
 			this.Name = "FGDSelector";
-			this.Size = new System.Drawing.Size(928, 596);
+			this.Size = new System.Drawing.Size(900, 596);
 			this.grpFgds.ResumeLayout(false);
 			this.ResumeLayout(false);
 

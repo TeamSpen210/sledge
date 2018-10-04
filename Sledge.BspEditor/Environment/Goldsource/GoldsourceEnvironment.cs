@@ -433,9 +433,9 @@ namespace Sledge.BspEditor.Environment.Goldsource
         private static readonly string AutoVisgroupPrefix = typeof(GoldsourceEnvironment).Namespace + ".AutomaticVisgroups";
 
         public IEnumerable<AutomaticVisgroup> GetAutomaticVisgroups()
-        {
-            // Entities
-            yield return new AutomaticVisgroup(x => x is Entity && x.Hierarchy.HasChildren)
+			{
+			// Entities
+			yield return new AutomaticVisgroup(x => x is Entity && x.Hierarchy.HasChildren)
             {
                 Path = $"{AutoVisgroupPrefix}.Entities",
                 Key = $"{AutoVisgroupPrefix}.BrushEntities"
