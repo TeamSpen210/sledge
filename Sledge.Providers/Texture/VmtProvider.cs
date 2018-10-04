@@ -5,13 +5,14 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using Sledge.Common;
+using Sledge.Common.Transport;
 using Sledge.Packages;
 using Sledge.Packages.Vpk;
 using Sledge.Rendering.Materials;
 
 namespace Sledge.Providers.Texture
 {
-    public class VmtProvider : TextureProvider
+    public class VmtProvider : ITexturePackageProvider
     {
         private readonly Dictionary<TexturePackage, QuickRoot> _roots = new Dictionary<TexturePackage, QuickRoot>();
 
@@ -62,7 +63,7 @@ namespace Sledge.Providers.Texture
                 if (!packages.ContainsKey(dir)) packages.Add(dir, new TexturePackage(packageRoot, dir, this));
                 if (packages[dir].HasTexture(vmt)) continue;
 
-                var gs = GenericStructure.Parse(new StreamReader(vmtRoot.OpenFile(vmt))).FirstOrDefault();
+                var gs = SerialisedObject(new StreamReader(vmtRoot.OpenFile(vmt))).FirstOrDefault();
                 if (gs == null || !types.Contains(gs.Name.ToLowerInvariant())) continue;
 
                 var baseTexture = gs.GetPropertyValue("$basetexture", true);

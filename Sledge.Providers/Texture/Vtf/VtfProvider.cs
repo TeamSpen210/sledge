@@ -5,7 +5,8 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
-using OpenTK;
+using Sledge.Common.Extensions;
+using Sledge.DataStructures;
 using Sledge.FileSystem;
 
 namespace Sledge.Providers.Texture.Vtf
@@ -67,7 +68,7 @@ namespace Sledge.Providers.Texture.Vtf
 
                 br.ReadBytes(4); // padding
 
-                var reflectivity = br.ReadCoordinate();
+                var reflectivity = br.ReadVector3();
 
                 br.ReadBytes(4); // padding
 
